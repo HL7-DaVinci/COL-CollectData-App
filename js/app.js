@@ -73,6 +73,10 @@ if (!COL) {
         }
     };
 
+    COL.disable = (id) => {
+        $("#"+id).prop("disabled",true);
+    };
+
     COL.loadData = (client) => {
         COL.displaySelectionScreen();
         try {
@@ -121,6 +125,34 @@ if (!COL) {
             }
         }
     }
+
+    COL.reconcile = () => {
+        $('#discharge-selection').hide();
+        COL.disable('btn-submit');
+        COL.disable('btn-edit');
+        $('#btn-submit').html("<i class='fa fa-circle-o-notch fa-spin'></i> Submit measure report");
+
+        if (COL.providerEndpoint.type === "secure-smart") {
+            sessionStorage.operationPayload = JSON.stringify(COL.operationPayload);
+            if (localStorage.tokenResponse) {
+                // load state from localStorage
+                let state = JSON.parse(localStorage.tokenResponse).state;
+                sessionStorage.tokenResponse = localStorage.tokenResponse;
+                sessionStorage[state] = localStorage[state];
+                FHIR.oauth2.ready(COL.initialize);
+            } else {
+                FHIR.oauth2.authorize({
+                    "client": {
+                        "client_id": COL.providerEndpoint.clientID,
+                        "scope":  COL.providerEndpoint.scope
+                    },
+                    "server": COL.providerEndpoint.url
+                });
+            }
+        } else {
+            COL.finalize();
+        }
+    };
 
     COL.finalize = () => {
         let promise;

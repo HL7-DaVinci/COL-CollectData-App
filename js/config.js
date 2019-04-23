@@ -13,9 +13,16 @@ if (!COL) {
   COL.submitEndpoint = "";
 
   COL.providerEndpoints = [{
-      "name": "DaVinci COL Provider (Open)",
-      "type": "open",
-      "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open"
+        "name": "DaVinci COL Provider (Open)",
+        "type": "open",
+        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open"
+    },
+    {
+        "name": "DaVinci COL Provider (Open)",
+        "type": "open",
+        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open",
+        "clientID": "4a71a430-0316-4e2a-8477-7671d7d3b862",
+        "scope": "user/*.read"
     }
   ];
 
