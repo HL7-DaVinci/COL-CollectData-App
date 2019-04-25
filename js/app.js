@@ -175,7 +175,7 @@ if (!COL) {
         promise.then(() => {
             console.log (JSON.stringify(COL.operationPayload, null, 2));
             COL.displayConfirmScreen();
-        }, () => COL.displayErrorScreen("Communication request submission failed", "Please check the submit endpoint configuration"));
+        }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration \n You can close this window now."));
     }
 
 

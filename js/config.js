@@ -18,7 +18,7 @@ if (!COL) {
         "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open"
     },
     {
-        "name": "DaVinci COL Provider (Open)",
+        "name": "DaVinci COL Provider (Secure)",
         "type": "open",
         "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open",
         "clientID": "4a71a430-0316-4e2a-8477-7671d7d3b862",
