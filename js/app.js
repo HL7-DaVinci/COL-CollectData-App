@@ -95,6 +95,7 @@ if (!COL) {
     };
 
     COL.loadData = (client) => {
+        $('#btn-review').hide();
         $('#scenario-intro').html(COL.scenarioDescription.description);
         COL.displayIntroScreen();
         try {
@@ -108,6 +109,7 @@ if (!COL) {
                     $('#selection-list').append("<tr><td>" + COL.getPatientName(patient) +
                         "</td><td><input type='checkbox' id=" + patient.id + "></td></tr>");
                 });
+                $('#btn-review').show();
             });
         } catch (err) {
             COL.displayErrorScreen("Failed to initialize request menu", "Please make sure that everything is OK with request configuration");
@@ -201,6 +203,7 @@ if (!COL) {
 
                 promise.then((measure) => {
                     COL.measures.push(measure);
+                    $('#measure-list').append("<tr><td><pre>" + JSON.stringify(measure.parameter[0], null, 2) + "</pre></td></tr>");
                     COL.displayConfirmScreen();
                 }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration </br> You can close this window now."));
 
