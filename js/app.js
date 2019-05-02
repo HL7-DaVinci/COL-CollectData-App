@@ -188,8 +188,7 @@ if (!COL) {
                 let promise;
                 let config = {
                     type: 'GET',
-                    url: COL.providerEndpoint.url + "/Measure/measure-col/$collect-data?" + COL.period() + "&subject=Patient/" + patient.id,
-                    contentType: "application/fhir+json"
+                    url: COL.providerEndpoint.url + COL.collectDataEndpoint + COL.period() + "&patient=Patient/" + patient.id
                 };
 
                 if (COL.providerEndpoint.type !== "open") {
@@ -203,7 +202,7 @@ if (!COL) {
                 promise.then((measure) => {
                     COL.measures.push(measure);
                     COL.displayConfirmScreen();
-                }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration \n You can close this window now."));
+                }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration </br> You can close this window now."));
 
             }
         });

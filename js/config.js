@@ -20,18 +20,18 @@ if (!COL) {
     "scope"    : "user/*.* openid profile"
   };
 
-  COL.submitEndpoint = "";
+  COL.collectDataEndpoint = "/Measure/measure-col/$collect-data?";
 
   COL.providerEndpoints = [{
         "name": "DaVinci COL Provider (Open)",
         "type": "open",
-        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open"
+        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLProvider/open"
     },
     {
         "name": "DaVinci COL Provider (Secure)",
         "type": "open",
-        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLPayer/open",
-        "clientID": "4a71a430-0316-4e2a-8477-7671d7d3b862",
+        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLProvider/data",
+        "clientID": "a46a1707-b22f-43b0-aa82-9023d84a13e8",
         "scope": "user/*.read"
     }
   ];
