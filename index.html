@@ -12,10 +12,19 @@
      <script src="js/config.js"></script>
  </head>
  <body>
- <div id="icon-logo"><img src="images/logo.jpg" height="100" width="100">
-     <h1>COL Additional Data Collection Application</h1></div>
+ <div class="wine-row">
+     <img src="images/logo.jpg" style="height:100px; width:150px">
+     <div class="wine-text-container"><h1>COL Additional Data Collection Application</h1></div>
+ </div>
+ <div id="intro-screen" class="card alert-info screen">
+     <div class="card-body">
+         <h5 class="card-title">Scenario Description</h5>
+         <p class='card-text' id='scenario-intro'></p>
+         <a href="#" class="btn btn-primary" id="btn-start">Select Patients</a>
+     </div>
+ </div>
     <div id="selection-screen" class="screen">
-        <h1>Select Patients</h1>
+        <h3>Select Patients</h3>
         <div><p><div class='dvt'>
             <table class='table'>
                 <thead>
@@ -25,6 +34,7 @@
                 </tr>
                 </thead>
                 <tbody id='selection-list'>
+                <tr><td><img src="images/glow.gif" id="spinner" style="height:400px; width:500px"></td></tr>
                 </tbody>
             </table>
             </div></p>

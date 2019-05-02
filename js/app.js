@@ -13,12 +13,29 @@ if (!COL) {
         return date.toISOString();
     };
 
+    COL.period = () => {
+        let date = new Date();
+        let year = date.getYear() + 1900;
+        let month = date.getMonth() + 1;
+
+        let quotient = Math.floor(COL.reportPeriod / 12);
+        let remainder = COL.reportPeriod % 12;
+        let startPeriod = "periodStart=" + (year - quotient) + "-" + (month - remainder);
+        let endPeriod = "&periodEnd=" + year + "-" + month;
+        return startPeriod + endPeriod;
+    }
+
     COL.displayScreen = (screenID) => {
+        $('#intro-screen').hide();
         $('#selection-screen').hide();
         $('#review-screen').hide();
         $('#confirm-screen').hide();
         $('#config-screen').hide();
         $('#'+screenID).show();
+    };
+
+    COL.displayIntroScreen = () => {
+        COL.displayScreen('intro-screen');
     };
 
     COL.displaySelectionScreen = () => {
@@ -78,12 +95,14 @@ if (!COL) {
     };
 
     COL.loadData = (client) => {
-        COL.displaySelectionScreen();
+        $('#scenario-intro').html(COL.scenarioDescription.description);
+        COL.displayIntroScreen();
         try {
             COL.client = client;
             COL.client.api.fetchAll(
                 {type: "Patient"}
             ).then(function (results) {
+                $('#selection-list').empty();
                 COL.patients = results;
                 results.forEach((patient) => {
                     $('#selection-list').append("<tr><td>" + COL.getPatientName(patient) +
@@ -155,30 +174,42 @@ if (!COL) {
     };
 
     COL.finalize = () => {
-        let promise;
-
-        var config = {
-            type: 'POST',
-            url: COL.providerEndpoint.url + COL.submitEndpoint,
-            data: JSON.stringify(COL.operationPayload),
-            contentType: "application/fhir+json"
-        };
-
-        if (COL.providerEndpoint.type !== "open") {
-            config['beforeSend'] = function (xhr) {
-                xhr.setRequestHeader ("Authorization", "Bearer " + COL.providerEndpoint.accessToken);
-            };
+        let checkboxes = $('#selection-list input[type=checkbox]');
+        let selectedPatients = [];
+        for (let i = 0; i < checkboxes.length; i++) {
+            if(checkboxes[i].checked == true){
+                selectedPatients.push(checkboxes[i].id);
+            }
         }
 
-        promise = $.ajax(config);
+        COL.measures = [];
+        COL.patients.forEach((patient) => {
+            if(selectedPatients.includes(patient.id)) {
+                let promise;
+                let config = {
+                    type: 'GET',
+                    url: COL.providerEndpoint.url + "/Measure/measure-col/$collect-data?" + COL.period() + "&subject=Patient/" + patient.id,
+                    contentType: "application/fhir+json"
+                };
 
-        promise.then(() => {
-            console.log (JSON.stringify(COL.operationPayload, null, 2));
-            COL.displayConfirmScreen();
-        }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration \n You can close this window now."));
+                if (COL.providerEndpoint.type !== "open") {
+                    config['beforeSend'] = function (xhr) {
+                        xhr.setRequestHeader ("Authorization", "Bearer " + COL.providerEndpoint.accessToken);
+                    };
+                }
+
+                promise = $.ajax(config);
+
+                promise.then((measure) => {
+                    COL.measures.push(measure);
+                    COL.displayConfirmScreen();
+                }, () => COL.displayErrorScreen("Collect data failed", "Please check the collect data endpoint configuration \n You can close this window now."));
+
+            }
+        });
     }
 
-
+    $('#btn-start').click(COL.displaySelectionScreen);
     $('#btn-review').click(COL.displayReviewScreen);
     $('#btn-edit').click(COL.displaySelectionScreen);
     $('#btn-submit').click(COL.reconcile);
