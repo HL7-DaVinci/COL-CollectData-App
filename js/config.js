@@ -25,12 +25,12 @@ if (!COL) {
   COL.providerEndpoints = [{
         "name": "DaVinci COL Provider (Open)",
         "type": "open",
-        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLProvider/open"
+        "url": "https://api.logicahealth.org/DaVinciCOLPayer/open"
     },
     {
         "name": "DaVinci COL Provider (Secure)",
         "type": "open",
-        "url": "https://api-v8-stu3.hspconsortium.org/DaVinciCOLProvider/data",
+        "url": "https://api.logicahealth.org/DaVinciCOLPayer/data",
         "clientID": "a46a1707-b22f-43b0-aa82-9023d84a13e8",
         "scope": "user/*.read"
     }
