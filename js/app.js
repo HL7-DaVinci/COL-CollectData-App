@@ -83,7 +83,7 @@ if (!COL) {
 
     COL.getPatientName = (pt) => {
         if (pt.name) {
-            let names = pt.name.map((n) => n.given.join(" ") + " " + n.family);
+            let names = pt.name.map((n) => n.family + ", " + n.given.join(" "));
             return names.join(" / ");
         } else {
             return "anonymous";
@@ -103,12 +103,22 @@ if (!COL) {
             COL.client.api.fetchAll(
                 {type: "Patient"}
             ).then(function (results) {
-                $('#selection-list').empty();
-                COL.patients = results;
-                results.forEach((patient) => {
-                    $('#selection-list').append("<tr><td>" + COL.getPatientName(patient) +
-                        "</td><td><input type='checkbox' id=" + patient.id + "></td></tr>");
+                COL.patients = results.sort((a,b) => COL.getPatientName(a) > COL.getPatientName(b));
+                COL.patients.forEach((patient) => {
+                    $('#selection-list').append("<tr><td><input type='checkbox' id=" + patient.id + "> " + COL.getPatientName(patient) +
+                        "</td></tr>");
                 });
+                $('#selection-list td').click(function () {
+                    if ($(this).hasClass("selected-patient")) {
+                        $(this).removeClass("selected-patient");
+                        $("input[type='checkbox']", this).prop( "checked", false );
+                    } else {
+                        $(this).addClass("selected-patient");
+                        $("input[type='checkbox']", this).prop( "checked", true );
+                    }
+                });
+                $('#spinner').hide();
+                $('#patients-list').show();
                 $('#btn-review').show();
             });
         } catch (err) {

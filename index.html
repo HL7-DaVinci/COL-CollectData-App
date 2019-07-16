@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-     <title>COL Additional Data Collection Application</title>
+     <title>COL Additional Data Collection</title>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      <script src="lib/fhir-client-0.1.8.js"></script>
      <script src="lib/jquery-3.3.1.js"></script>
@@ -13,8 +13,8 @@
  </head>
  <body>
  <div class="wine-row">
-     <img src="images/logo.jpg" style="height:100px; width:150px">
-     <div class="wine-text-container"><h1>COL Additional Data Collection Application</h1></div>
+     <img src="images/logo.jpg" style="height:100px; width:100px">
+     <div class="wine-text-container"><h1>COL Additional Data Collection</h1></div>
  </div>
  <div id="intro-screen" class="card alert-info screen">
      <div class="card-body">
@@ -24,32 +24,22 @@
      </div>
  </div>
     <div id="selection-screen" class="screen">
-        <h3>Select Patients</h3>
-        <div><p><div class='dvt'>
-            <table class='table'>
-                <thead>
-                <tr>
-                    <th>Patient Name</th>
-                    <th>Choose</th>
-                </tr>
-                </thead>
-                <tbody id='selection-list'>
-                <tr><td><img src="images/glow.gif" id="spinner" style="height:400px; width:500px"></td></tr>
-                </tbody>
-            </table>
-            </div></p>
+        <div id="spinner"><img src="images/spinner.gif"></div>
+        <div id="patients-list">
+            <h3>Patients</h3>
+            <p class='dvt'>
+                <table class='table'>
+                    <tbody id='selection-list'>
+                    </tbody>
+                </table>
+            </p>
         </div>
         <button type="button" class="btn btn-secondary" id="btn-review">Review</button>
     </div>
     <div id="review-screen" class="screen">
-        <h3>Review Patients</h3>
+        <h3>Review Patients Selection</h3>
         <div id="review-lists"><p><div class='dvt'>
             <table class='table alert-warning'>
-                <thead>
-                <tr>
-                    <th>Patient Name</th>
-                </tr>
-                </thead>
                 <tbody id='final-list'>
 
                 </tbody>

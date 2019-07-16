@@ -44,3 +44,31 @@ input{
     flex-direction: column;
     justify-content: center;
 }
+
+#patients-list table tbody tr :hover{
+    background-color: GhostWhite;
+}
+
+#patients-list {
+    display: none;
+    width: 700px;
+}
+
+#spinner {
+    width: 700px;
+    text-align: center;
+}
+
+#spinner img{
+    width: 30%;
+    height: 30%;
+}
+
+.selected-patient {
+    background-color: #fff3cd;
+    font-weight: bold;
+}
+
+#patients-list td :hover {
+    background-color: GhostWhite;
+}
