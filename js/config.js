@@ -31,7 +31,7 @@ if (!COL) {
         "name": "DaVinci COL Provider (Secure)",
         "type": "open",
         "url": "https://api.logicahealth.org/DaVinciCOLPayer/data",
-        "clientID": "a46a1707-b22f-43b0-aa82-9023d84a13e8",
+        "clientID": "e29af919-0ba3-4c4b-8f85-8f10a8ef5313",
         "scope": "user/*.read"
     }
   ];
