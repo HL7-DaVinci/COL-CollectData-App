@@ -72,3 +72,11 @@ input{
 #patients-list td :hover {
     background-color: GhostWhite;
 }
+
+#measure-lists {
+    width: 700px;
+}
+
+pre {
+    white-space: pre-wrap;
+}
