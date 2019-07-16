@@ -26,14 +26,14 @@ if (!COL) {
         "name": "DaVinci COL Provider (Open)",
         "type": "open",
         "url": "https://api.logicahealth.org/DaVinciCOLPayer/open"
-    },
-    {
+    }
+    /*{
         "name": "DaVinci COL Provider (Secure)",
         "type": "open",
         "url": "https://api.logicahealth.org/DaVinciCOLPayer/data",
         "clientID": "e29af919-0ba3-4c4b-8f85-8f10a8ef5313",
         "scope": "user/*.read"
-    }
+    }*/
   ];
 
   // default configuration
