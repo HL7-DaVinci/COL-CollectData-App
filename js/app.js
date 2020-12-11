@@ -200,7 +200,7 @@ if (!COL) {
                 let promise;
                 let config = {
                     type: 'GET',
-                    url: COL.providerEndpoint.url + COL.collectDataEndpoint + COL.period() + "&patient=Patient/" + patient.id
+                    url: COL.providerEndpoint.url + COL.collectDataEndpoint.replace("MEASUREID", COL.providerEndpoint.measureID) + COL.period() + "&patient=Patient/" + patient.id
                 };
 
                 if (COL.providerEndpoint.type !== "open") {

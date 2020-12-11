@@ -20,24 +20,31 @@ if (!COL) {
     "scope"    : "user/*.* openid profile"
   };
 
-  COL.collectDataEndpoint = "/Measure/measure-col/$collect-data?";
+  COL.collectDataEndpoint = "/Measure/MEASUREID/$collect-data?";
 
   COL.providerEndpoints = [{
+        "name": "Alphora Payer (Open)",
+        "type": "open",
+        "url": "https://gic-sandbox.alphora.com/cqf-ruler-r4/fhir",
+        "measureID": "measure-EXM130-7.3.000"
+    },{
         "name": "DaVinci COL Provider (Open)",
         "type": "open",
-        "url": "https://api.logicahealth.org/DaVinciCOLPayer/open"
+        "url": "https://api.logicahealth.org/DaVinciCOLPayer/open",
+        "measureID": "measure-col"
     }
     /*{
         "name": "DaVinci COL Provider (Secure)",
         "type": "open",
         "url": "https://api.logicahealth.org/DaVinciCOLPayer/data",
+        "measureID": "measure-col",
         "clientID": "e29af919-0ba3-4c4b-8f85-8f10a8ef5313",
         "scope": "user/*.read"
     }*/
   ];
 
   // default configuration
-  COL.configSetting = 0; // HSPC Payer Demo (Open)
+  COL.configSetting = 0; // Alphora Payer (Open)
   COL.providerEndpoint = COL.providerEndpoints[COL.configSetting];
 
   COL.reportPeriod = 12;
